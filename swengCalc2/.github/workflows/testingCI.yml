@@ -7,7 +7,7 @@ on:
 
 jobs: 
   CIWorkFlowTest:
-    name: testing
+    name: testingCI
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout code
