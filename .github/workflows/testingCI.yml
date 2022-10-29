@@ -1,8 +1,7 @@
 name: testingCI
 
-on:
-   push:
-    branches: [ main ]
+on: [push, fork]
+   #branches: [ main ]
       
 
 jobs: 
