@@ -23,6 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import swengCalc2.Calculator;
 
 @SpringBootApplication
 public class WebserverApplication {
@@ -43,9 +44,12 @@ public class WebserverApplication {
 @Controller
 class NoteController {
 
-    @GetMapping("/")
+    @PostMapping("/")
     public String calculate(@RequestParam String sum, Model model) {
-        return "";
+        Calculator Calc = new Calculator();
+        //String result = Calc.equate(sum);
+        model.addAttribute("result","Says something");
+        return "/";
     }
 
 }
