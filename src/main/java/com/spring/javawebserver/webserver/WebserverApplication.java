@@ -9,9 +9,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,11 +42,11 @@ public class WebserverApplication {
 class NoteController {
 
     @PostMapping("/calc")
-    public String calculate(@RequestParam String sum, Model model) {
+    public String calculate(@RequestParam String sum, @RequestParam String add, Model model) {
         Calculator Calc = new Calculator();
-        //String result = Calc.equate(sum);
-        model.addAttribute("result","Says something");
-        return "/";
+        String result = Calc.equate(sum);
+        model.addAttribute("result",result);
+        return "index";
     }
 
 }
