@@ -4,13 +4,13 @@ import java.util.*;
 public class Calculator {
     
     Stack<String> opStack;
-    Stack<Integer> valStack;
+    Stack<Float> valStack;
     ArrayList<String> array;
 
     // Constructor create two stacks
     public Calculator(){
         Stack<String> opStack = new Stack<>();
-        Stack<Integer> valStack = new Stack<>();
+        Stack<Float> valStack = new Stack<>();
         this.opStack = opStack;
         this.valStack = valStack;
     }
@@ -18,7 +18,7 @@ public class Calculator {
  // returns string output of solved input
     public String equate(String input){
         try {
-    	int result = evaluateInfix(input);
+    	float result = evaluateInfix(input);
         String resultString = "" + result;
         return resultString; 
         } catch(java.lang.Exception e) {return "Invalid input please try again";}
@@ -82,13 +82,13 @@ public class Calculator {
         }
         // Else push to valStack
         else{
-            valStack.push(Integer.parseInt(op));
+            valStack.push(Float.parseFloat(op));
         }
         } catch (java.lang.Exception e){System.out.println("Error: Unable to push to satck");}
     }
 
     // Evaluates infix expression by converting to postfix
-    public Integer evaluateInfix(String infix){
+    public float evaluateInfix(String infix){
         toArray(infix);
         String output = "";
         String value;
@@ -181,16 +181,16 @@ public class Calculator {
     }
 
     // Evaluates postfix expression
-    public Integer evaluatePostfix(String postfix){
+    public Float evaluatePostfix(String postfix){
         toArray(postfix);
-        int result;
-        int operand1;
-        int operand2;
+        float result;
+        float operand1;
+        float operand2;
 
         for(int i=0; i<=array.size()-1; i++){
             String value = array.get(i);
             if(!isOperator(value)){
-                int dvalue = Integer.parseInt(value);
+                float dvalue = Integer.parseInt(value);
                 valStack.push(dvalue);
             }
             if(isOperator(value)){
