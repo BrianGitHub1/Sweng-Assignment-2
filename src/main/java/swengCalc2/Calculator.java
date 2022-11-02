@@ -91,7 +91,7 @@ public class Calculator {
     }
     // Checks if passed String is a boolean
     public Boolean isOperator(String op){
-        if(op.equalsIgnoreCase("+") || op.equalsIgnoreCase("-") || op.equalsIgnoreCase("*") || op.equalsIgnoreCase("/") || op.equalsIgnoreCase("(") || op.equalsIgnoreCase(")")){
+        if(op.equalsIgnoreCase("+") || op.equalsIgnoreCase("-") || op.equalsIgnoreCase("*") || op.equalsIgnoreCase("/") || op.equalsIgnoreCase("(") || op.equalsIgnoreCase(")") || op.equalsIgnoreCase("^")){
             return true;
         }
         else return false;
@@ -99,7 +99,7 @@ public class Calculator {
 
     // Checks if passed char is a boolean
     public Boolean isOperator(char op){
-        if(op == '+' || op == '-' || op == '*' || op == '/' || op =='(' || op ==')'){
+        if(op == '+' || op == '-' || op == '*' || op == '/' || op =='(' || op ==')' || op == '^'){
             return true;
         }
         else return false;
@@ -184,39 +184,31 @@ public class Calculator {
         int op1Val = 0;
         int op2Val = 0;
 
-        switch(op1){
-            case "*":
-                op1Val = 2;
-                break;
-            case "/":
-                op1Val = 2;
-                break;
-            case "+":
-                op1Val =1;
-                break;
-            case "-":
-                op1Val =1;
-                break;
-        }
+        op1Val = getOpVal(op1, op1Val);
 
-        switch(op2){
-            case "*":
-                op2Val = 2;
-                break;
-            case "/":
-                op2Val = 2;
-                break;
-            case "+":
-                op2Val =1;
-                break;
-            case "-":
-                op2Val =1;
-                break;
-        }
+        op2Val = getOpVal(op2, op2Val);
+
         if(op1Val >= op2Val && op1Val !=0 && op2Val !=0){
             return true;
         }
         else return false;
+    }
+
+    private int getOpVal(String op2, int op2Val) {
+        switch(op2){
+            case "^":
+                op2Val = 3;
+                break;
+            case "*":
+            case "/":
+                op2Val = 2;
+                break;
+            case "+":
+            case "-":
+                op2Val =1;
+                break;
+        }
+        return op2Val;
     }
 
     // Evaluates postfix expression
@@ -258,6 +250,12 @@ public class Calculator {
                         operand2 = valStack.pop();
                         operand1 = valStack.pop();
                         result = operand1 / operand2;
+                        valStack.push(result);
+                        break;
+                    case "^":
+                        operand2 = valStack.pop();
+                        operand1 = valStack.pop();
+                        result = (float) Math.pow(operand1, operand2);
                         valStack.push(result);
                         break;
                     default:
