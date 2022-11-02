@@ -30,8 +30,28 @@ public class Calculator {
     	this.array = new ArrayList<String>();
         String tmp = "";
         for(int i = 0; i <= input.length()-1; i++){
+            //log
+            if(input.charAt(i) == 'l' && input.charAt(i+1) == 'o' && input.charAt(i+2) == 'g' && input.charAt(i+3) == '(')
+            {
+                i = i + 4;
+                String number = "";
+                while(!isOperator(input.charAt(i)))
+                {
+                    number = number + input.charAt(i);
+                    i++;
+                }
+                if(input.charAt(i) == ')')
+                {
+                    double answer = Math.log(Double.parseDouble(number));
+                    array.add(String.valueOf(answer));
+                }
+                else
+                {
+                    array.add("Error");
+                }
+            }
             // if op add operator to list
-            if(isOperator(input.charAt(i)) && input.charAt(i)!=' '){
+            else if(isOperator(input.charAt(i)) && input.charAt(i)!=' '){
                 tmp += input.charAt(i);
                 array.add(tmp);
                 tmp = "";
@@ -84,7 +104,7 @@ public class Calculator {
         else{
             valStack.push(Float.parseFloat(op));
         }
-        } catch (java.lang.Exception e){System.out.println("Error: Unable to push to satck");}
+        } catch (java.lang.Exception e){System.out.println("Error: Unable to push to stack");}
     }
 
     // Evaluates infix expression by converting to postfix
@@ -190,7 +210,7 @@ public class Calculator {
         for(int i=0; i<=array.size()-1; i++){
             String value = array.get(i);
             if(!isOperator(value)){
-                float dvalue = Integer.parseInt(value);
+                float dvalue = Float.parseFloat(value);
                 valStack.push(dvalue);
             }
             if(isOperator(value)){
