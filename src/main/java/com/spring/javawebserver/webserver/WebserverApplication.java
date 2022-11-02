@@ -44,7 +44,7 @@ public class WebserverApplication {
 @Controller
 class NoteController {
 
-    @PostMapping("/")
+    @PostMapping("/calc")
     public String calculate(@RequestParam String sum, Model model) {
         Calculator Calc = new Calculator();
         //String result = Calc.equate(sum);
