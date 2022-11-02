@@ -35,7 +35,7 @@ public class Calculator {
             {
                 i = i + 4;
                 String number = "";
-                while(!isOperator(input.charAt(i)))
+                while(!isOperator(input.charAt(i)) || !isSpace(input.charAt(i)))
                 {
                     number = number + input.charAt(i);
                     i++;
@@ -54,7 +54,7 @@ public class Calculator {
             {
                 i = i+4;
                 String number = "";
-                while(!isOperator(input.charAt(i)))
+                while(!isOperator(input.charAt(i)) || !isSpace(input.charAt(i)))
                 {
                     number = number + input.charAt(i);
                     i++;
@@ -68,6 +68,17 @@ public class Calculator {
                 {
                     array.add("Error");
                 }
+            }
+            else if(input.charAt(i) == '-' && (i == 0 || (isOperator(input.charAt(i-1)) && (input.charAt(i+1) != ' ' && !isOperator(input.charAt(i+1))))))
+            {
+                String number = "" + input.charAt(i);
+                i++;
+                for(; i < input.length() && !isOperator(input.charAt(i)) && !isSpace(input.charAt(i)); i++)
+                {
+                    number = number + input.charAt(i);
+                }
+                i = i - 1;
+                array.add(number);
             }
             // if op add operator to list
             else if(isOperator(input.charAt(i)) && input.charAt(i)!=' '){
@@ -220,9 +231,24 @@ public class Calculator {
 
         for(int i=0; i<=array.size()-1; i++){
             String value = array.get(i);
-            if(!isOperator(value)){
-                float dvalue = Float.parseFloat(value);
-                valStack.push(dvalue);
+            int size = array.size() - 1;
+            if (i != size)
+            {
+                if(isOperator(value) && !isOperator(array.get(i+1)))
+                {
+                    i++;
+                    for(; !isOperator(array.get(i)); i++)
+                    {
+                        value = value + array.get(i);
+                    }
+                    float dvalue = Float.parseFloat(value);
+                    valStack.push(dvalue);
+                    i = i - 1;
+                }
+                else if(!isOperator(value)){
+                    float dvalue = Float.parseFloat(value);
+                    valStack.push(dvalue);
+                }
             }
             if(isOperator(value)){
                 switch(value){
