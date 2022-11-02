@@ -50,6 +50,25 @@ public class Calculator {
                     array.add("Error");
                 }
             }
+            else if(input.charAt(i) == 'e' && input.charAt(i+1) == 'x' && input.charAt(i+2) == 'p' && input.charAt(i+3) == '(')
+            {
+                i = i+4;
+                String number = "";
+                while(!isOperator(input.charAt(i)))
+                {
+                    number = number + input.charAt(i);
+                    i++;
+                }
+                if(input.charAt(i) == ')')
+                {
+                    double answer = Math.exp(Double.parseDouble(number));
+                    array.add(String.valueOf(answer));
+                }
+                else
+                {
+                    array.add("Error");
+                }
+            }
             // if op add operator to list
             else if(isOperator(input.charAt(i)) && input.charAt(i)!=' '){
                 tmp += input.charAt(i);
