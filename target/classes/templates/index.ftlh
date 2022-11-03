@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head><title></title>
-    <link rel="stylesheet" href="tachyons.min.css">
-</head>
-<body class="ph3 pt0 pb4 mw7 center sans-serif">
-<h1 class="f2 mb0"><span class="gold">i</span>Calc</h1>
-<p class="f5 mt1 mb4 lh-copy">A simple calculator web app</p>
-<form action="/calc" method="POST" enctype="multipart/form-data">
-    <ol class="list pl0">
-        <li class="mv3"><label class="f6 b db mb2" for="sum">Insert Expression</label>
-            <textarea class="f4 db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" rows="1"
-                      name="sum"><#if sum??>${sum}</#if></textarea>
-            <input class="f6 link dim br1 ba bw1 ph3 pv2 mb2 dib black bg-white pointer" type="submit" value="Calculate"
-                   name="add">
-        </li>
-    </ol>
-</form>
-<ul class="list pl0"><p class="f6 b db mb2">Equations</p>
-<li>
-    <#if result??>
-                <p>${result}</p>
+  <head><title>Calculator App</title>
+      <link rel="stylesheet" href="stylesheet.css">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="header">Calculator</div>
+    <div style="padding-left:10%; padding-right:10%; padding-top:10px">
+      <div class="bodyElements">
+        <h2>Welcome to Group 28's Online Calculator App!</h2>
+        <p>Below you will find an input box where you can enter the expression you would like to calculate.</p>
+        <form action="/calc" method="POST" enctype="multipart/form-data">
+            <ol>
+                <li><label for="sum">Please Insert Expression</label>
+                    <input class="w3-input" style="border-bottom: 2px solid #2596be; margin-bottom:5px" type="text" name="sum"><#if sum??>${sum}</#if></textarea>
+                    <input style="background-color: #2596be; color: white; border-color:#2596be" type="submit" value="Calculate"
+                           name="add">
+                </li>
+            </ol>
+        </form>
+        <#if result??>
+                    <p>Result: ${result}</p>
+                    <p></p>
+            <#else>
                 <p></p>
-        <#else>
-            <p class="lh-copy f6">No previous calculations</p>
-    </#if>
-    </li>
-</ul>
-</body>
+        </#if>
+      </div>
+  </body>
 </html>
