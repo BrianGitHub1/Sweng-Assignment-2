@@ -63,9 +63,9 @@
 			</dependencies>
 			<configuration>
 				<includes>
-					<include>main/java/swengCalc2/Calculator.java</include>
-					<include>main/java/swengCalc2/main.java</include>
-					<include>test/java/swengCalc2/CalculatorTest.java</include>
+					<include>src/main/java/swengCalc2/Calculator.java</include>
+					<include>src/main/java/swengCalc2/main.java</include>
+					<include>src/test/java/swengCalc2/CalculatorTest.java</include>
 				</includes>
 			</configuration>
 		</plugin>
