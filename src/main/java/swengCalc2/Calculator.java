@@ -4,13 +4,13 @@ import java.util.*;
 public class Calculator {
     
     Stack<String> opStack;
-    Stack<Integer> valStack;
+    Stack<Float> valStack;
     ArrayList<String> array;
 
     // Constructor create two stacks
     public Calculator(){
         Stack<String> opStack = new Stack<>();
-        Stack<Integer> valStack = new Stack<>();
+        Stack<Float> valStack = new Stack<>();
         this.opStack = opStack;
         this.valStack = valStack;
     }
@@ -18,7 +18,7 @@ public class Calculator {
  // returns string output of solved input
     public String equate(String input){
         try {
-    	int result = evaluateInfix(input);
+    	float result = evaluateInfix(input);
         String resultString = "" + result;
         return resultString; 
         } catch(java.lang.Exception e) {return "Invalid input please try again";}
@@ -30,8 +30,47 @@ public class Calculator {
     	this.array = new ArrayList<String>();
         String tmp = "";
         for(int i = 0; i <= input.length()-1; i++){
+            //log
+            if(input.charAt(i) == 'l' && input.charAt(i+1) == 'o' && input.charAt(i+2) == 'g' && input.charAt(i+3) == '(')
+            {
+                i = i + 4;
+                String number = "";
+                while(!isOperator(input.charAt(i)))
+                {
+                    number = number + input.charAt(i);
+                    i++;
+                }
+                if(input.charAt(i) == ')')
+                {
+                    double answer = Math.log(Double.parseDouble(number));
+                    array.add(String.valueOf(answer));
+                }
+                else
+                {
+                    array.add("Error");
+                }
+            }
+            else if(input.charAt(i) == 'e' && input.charAt(i+1) == 'x' && input.charAt(i+2) == 'p' && input.charAt(i+3) == '(')
+            {
+                i = i+4;
+                String number = "";
+                while(!isOperator(input.charAt(i)))
+                {
+                    number = number + input.charAt(i);
+                    i++;
+                }
+                if(input.charAt(i) == ')')
+                {
+                    double answer = Math.exp(Double.parseDouble(number));
+                    array.add(String.valueOf(answer));
+                }
+                else
+                {
+                    array.add("Error");
+                }
+            }
             // if op add operator to list
-            if(isOperator(input.charAt(i)) && input.charAt(i)!=' '){
+            else if(isOperator(input.charAt(i)) && input.charAt(i)!=' '){
                 tmp += input.charAt(i);
                 array.add(tmp);
                 tmp = "";
@@ -52,7 +91,7 @@ public class Calculator {
     }
     // Checks if passed String is a boolean
     public Boolean isOperator(String op){
-        if(op.equalsIgnoreCase("+") || op.equalsIgnoreCase("-") || op.equalsIgnoreCase("*") || op.equalsIgnoreCase("/") || op.equalsIgnoreCase("(") || op.equalsIgnoreCase(")")){
+        if(op.equalsIgnoreCase("+") || op.equalsIgnoreCase("-") || op.equalsIgnoreCase("*") || op.equalsIgnoreCase("/") || op.equalsIgnoreCase("(") || op.equalsIgnoreCase(")") || op.equalsIgnoreCase("^")){
             return true;
         }
         else return false;
@@ -60,7 +99,7 @@ public class Calculator {
 
     // Checks if passed char is a boolean
     public Boolean isOperator(char op){
-        if(op == '+' || op == '-' || op == '*' || op == '/' || op =='(' || op ==')'){
+        if(op == '+' || op == '-' || op == '*' || op == '/' || op =='(' || op ==')' || op == '^'){
             return true;
         }
         else return false;
@@ -82,13 +121,13 @@ public class Calculator {
         }
         // Else push to valStack
         else{
-            valStack.push(Integer.parseInt(op));
+            valStack.push(Float.parseFloat(op));
         }
-        } catch (java.lang.Exception e){System.out.println("Error: Unable to push to satck");}
+        } catch (java.lang.Exception e){System.out.println("Error: Unable to push to stack");}
     }
 
     // Evaluates infix expression by converting to postfix
-    public Integer evaluateInfix(String infix){
+    public float evaluateInfix(String infix){
         toArray(infix);
         String output = "";
         String value;
@@ -145,52 +184,44 @@ public class Calculator {
         int op1Val = 0;
         int op2Val = 0;
 
-        switch(op1){
-            case "*":
-                op1Val = 2;
-                break;
-            case "/":
-                op1Val = 2;
-                break;
-            case "+":
-                op1Val =1;
-                break;
-            case "-":
-                op1Val =1;
-                break;
-        }
+        op1Val = getOpVal(op1, op1Val);
 
-        switch(op2){
-            case "*":
-                op2Val = 2;
-                break;
-            case "/":
-                op2Val = 2;
-                break;
-            case "+":
-                op2Val =1;
-                break;
-            case "-":
-                op2Val =1;
-                break;
-        }
+        op2Val = getOpVal(op2, op2Val);
+
         if(op1Val >= op2Val && op1Val !=0 && op2Val !=0){
             return true;
         }
         else return false;
     }
 
+    private int getOpVal(String op2, int op2Val) {
+        switch(op2){
+            case "^":
+                op2Val = 3;
+                break;
+            case "*":
+            case "/":
+                op2Val = 2;
+                break;
+            case "+":
+            case "-":
+                op2Val =1;
+                break;
+        }
+        return op2Val;
+    }
+
     // Evaluates postfix expression
-    public Integer evaluatePostfix(String postfix){
+    public Float evaluatePostfix(String postfix){
         toArray(postfix);
-        int result;
-        int operand1;
-        int operand2;
+        float result;
+        float operand1;
+        float operand2;
 
         for(int i=0; i<=array.size()-1; i++){
             String value = array.get(i);
             if(!isOperator(value)){
-                int dvalue = Integer.parseInt(value);
+                float dvalue = Float.parseFloat(value);
                 valStack.push(dvalue);
             }
             if(isOperator(value)){
@@ -219,6 +250,12 @@ public class Calculator {
                         operand2 = valStack.pop();
                         operand1 = valStack.pop();
                         result = operand1 / operand2;
+                        valStack.push(result);
+                        break;
+                    case "^":
+                        operand2 = valStack.pop();
+                        operand1 = valStack.pop();
+                        result = (float) Math.pow(operand1, operand2);
                         valStack.push(result);
                         break;
                     default:
