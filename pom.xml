@@ -74,6 +74,16 @@
 	<groupId>ro.isdc.wro4j</groupId>
 	<artifactId>wro4j-maven-plugin</artifactId>
 	<version>1.4.6</version>
+	<configuration>
+		<wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+		<wroFile>${basedir}/src/main/config/wro.xml</wroFile>
+		<extraConfigFile>${basedir}/src/main/config/wro.properties</extraConfigFile>
+		<targetGroups>all</targetGroups>
+		<cssDestinationFolder>${project.build.directory}/${project.build.finalName}/style/</cssDestinationFolder>
+		<jsDestinationFolder>${project.build.directory}/${project.build.finalName}/script/</jsDestinationFolder>
+		<contextFolder>${basedir}/src/main/webapp/</contextFolder>
+		<ignoreMissingResources>false</ignoreMissingResources>
+	</configuration>
 	<executions>
 		<execution>
 			<goals>
