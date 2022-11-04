@@ -70,7 +70,7 @@
 	</plugins>
 	    
 	    
-	    <plugin>
+	    <plugins>
 	<groupId>ro.isdc.wro4j</groupId>
 	<artifactId>wro4j-maven-plugin</artifactId>
 	<version>1.4.6</version>
@@ -92,7 +92,7 @@
 			<phase>generate-resources</phase>
 		</execution>
 	</executions>
-</plugin>
+</plugins>
 	    
 	    
 	    
