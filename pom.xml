@@ -63,7 +63,7 @@
 			</dependencies>
 			<configuration>
 				<includes>
-					<include>/home/runner/work/Sweng-Assignment-2/Sweng-Assignment-2/target/*.java</include>
+					<include>/home/runner/work/Sweng-Assignment-2/Sweng-Assignment-2/target/classes/swengCalc2/Calcualtor.class</include>
 				</includes>
 			</configuration>
 		</plugin>
