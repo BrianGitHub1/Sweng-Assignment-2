@@ -9,7 +9,7 @@ public class CalculatorTest {
 
 	
 	
-	/* 
+	
 	
 	@Test 
 	public void testadd() {
@@ -98,5 +98,5 @@ public class CalculatorTest {
 			assertEquals(calc.equate(in), expectedResult);
 		
 	}
-	*/
+	
 }
