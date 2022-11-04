@@ -68,6 +68,7 @@
 					<exclude>**/*.css</exclude>
 					<exclude>**/*.html</exclude>
 					<exclude>**/*.ftlh</exclude>
+					<exclude>**/*.iml</exclude>
 				</includes>
 			</configuration>
 		</plugin>
