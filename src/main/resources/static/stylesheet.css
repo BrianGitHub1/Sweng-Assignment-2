@@ -3,7 +3,6 @@
   height: 100vh;
   overflow: hidden;
   box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px #ccc, -12px 0 15px -4px #ccc;
-  background: white;
 }
 
 .header {
@@ -32,6 +31,4 @@ body {
   margin: 0;
   overflow: hidden;
   min-height: 100%;
-  background-image: url("CalculatorBackground.jpg");
-  background-size: auto;
 }
