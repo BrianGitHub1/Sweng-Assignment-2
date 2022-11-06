@@ -1,5 +1,6 @@
 package swengCalc2;
 
+import java.text.DecimalFormat;
 import java.util.*; 
 public class Calculator {
     
@@ -17,9 +18,10 @@ public class Calculator {
     
  // returns string output of solved input
     public String equate(String input){
+        DecimalFormat df = new DecimalFormat("#0.###");
         try {
     	float result = evaluateInfix(input);
-        String resultString = "" + result;
+        String resultString = df.format(result);//"" + result;
         return resultString; 
         } catch(java.lang.Exception e) {return "Invalid input please try again";}
 
